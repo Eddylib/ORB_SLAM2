@@ -38,12 +38,16 @@ endif()
 
 find_package(Eigen3 3.1.0 REQUIRED)
 find_package(Pangolin REQUIRED)
+if(NOT Pangolin_FOUND)
+      message(FATAL_ERROR "Pangolin found.")
+endif()
 
 include_directories(
 ${PROJECT_SOURCE_DIR}
 ${PROJECT_SOURCE_DIR}/include
 ${EIGEN3_INCLUDE_DIR}
 ${Pangolin_INCLUDE_DIRS}
+        Thirdparty/Sophus/
 )
 
 set(CMAKE_LIBRARY_OUTPUT_DIRECTORY ${PROJECT_SOURCE_DIR}/lib)
@@ -68,7 +72,7 @@ src/KeyFrameDatabase.cc
 src/Sim3Solver.cc
 src/Initializer.cc
 src/Viewer.cc
-)
+        include/OptimizeStructure.h src/OptimizeStructure.cpp)
 
 target_link_libraries(${PROJECT_NAME}
 ${OpenCV_LIBS}
